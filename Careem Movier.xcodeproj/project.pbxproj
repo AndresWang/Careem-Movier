@@ -22,6 +22,7 @@
 		09549C34206F8831003F7D43 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C33206F8831003F7D43 /* CoreDataStore.swift */; };
 		09549C36206F8D0C003F7D43 /* MoviedbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C35206F8D0C003F7D43 /* MoviedbAPI.swift */; };
 		09549C38206F9067003F7D43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C37206F9067003F7D43 /* Extensions.swift */; };
+		09549C3A206F9688003F7D43 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C39206F9688003F7D43 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		09549C33206F8831003F7D43 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		09549C35206F8D0C003F7D43 /* MoviedbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviedbAPI.swift; sourceTree = "<group>"; };
 		09549C37206F9067003F7D43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		09549C39206F9688003F7D43 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				09549BFA206F80CC003F7D43 /* AppDelegate.swift */,
 				09549C37206F9067003F7D43 /* Extensions.swift */,
 				09549C35206F8D0C003F7D43 /* MoviedbAPI.swift */,
+				09549C39206F9688003F7D43 /* Movie.swift */,
 				09549C31206F8724003F7D43 /* CoreDataStack.swift */,
 				09549C33206F8831003F7D43 /* CoreDataStore.swift */,
 				09549C2B206F8359003F7D43 /* SearchViewTrait.swift */,
@@ -289,6 +292,7 @@
 				09549BFB206F80CC003F7D43 /* AppDelegate.swift in Sources */,
 				09549C30206F8639003F7D43 /* SearchResultCell.swift in Sources */,
 				09549C34206F8831003F7D43 /* CoreDataStore.swift in Sources */,
+				09549C3A206F9688003F7D43 /* Movie.swift in Sources */,
 				09549C2E206F83A3003F7D43 /* SearchInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
