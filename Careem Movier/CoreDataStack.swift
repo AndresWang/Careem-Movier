@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+// Note: Create CoreData stack with singleton pattern
 class CoreDataStore {
     static let sharedInstance = CoreDataStore()
     
