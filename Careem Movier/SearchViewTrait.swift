@@ -11,4 +11,5 @@ import UIKit
 
 protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate {
     var interactor: SearchInteractorDelegate {get}
+    var searchResultCellIdentifier: String {get}
 }

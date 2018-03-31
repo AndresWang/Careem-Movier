@@ -8,9 +8,10 @@
 
 import UIKit
 
+// Note: SearchViewController is merely a coordinator between its interactor and its subviews.
 class SearchViewController: UITableViewController, SearchViewTrait {
     let interactor: SearchInteractorDelegate = SearchInteractor()
-    
+    let searchResultCellIdentifier = "SearchResultCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
