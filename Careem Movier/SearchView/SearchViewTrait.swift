@@ -14,7 +14,6 @@ protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate {
     var interactor: SearchInteractorDelegate! {get set}
     var hasSearched: Bool {get set}
     var isLoading: Bool {get set}
-    var selectedIndexPath: IndexPath? {get set}
     var searchResultCellIdentifier: String {get}
     var nothingFoundCellIdentifier: String {get}
     var loadingCellIdentifier: String {get}

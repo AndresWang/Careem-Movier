@@ -16,7 +16,6 @@ class SearchViewController: UITableViewController, SearchViewTrait {
     var loadingCellIdentifier = "LoadingCell"
     var hasSearched = false
     var isLoading = false
-    var selectedIndexPath: IndexPath?
 
     // MARK: - View LifeCyle
     override func awakeFromNib() {
