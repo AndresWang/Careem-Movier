@@ -18,6 +18,7 @@
 		09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2B206F8359003F7D43 /* SearchViewTrait.swift */; };
 		09549C2E206F83A3003F7D43 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2D206F83A3003F7D43 /* SearchInteractor.swift */; };
 		09549C30206F8639003F7D43 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2F206F8639003F7D43 /* SearchResultCell.swift */; };
+		09549C32206F8724003F7D43 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C31206F8724003F7D43 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		09549C2B206F8359003F7D43 /* SearchViewTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTrait.swift; sourceTree = "<group>"; };
 		09549C2D206F83A3003F7D43 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		09549C2F206F8639003F7D43 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		09549C31206F8724003F7D43 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				09549BFA206F80CC003F7D43 /* AppDelegate.swift */,
+				09549C31206F8724003F7D43 /* CoreDataStack.swift */,
 				09549C2B206F8359003F7D43 /* SearchViewTrait.swift */,
 				09549C2D206F83A3003F7D43 /* SearchInteractor.swift */,
 				09549BFC206F80CC003F7D43 /* SearchViewController.swift */,
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09549C32206F8724003F7D43 /* CoreDataStack.swift in Sources */,
 				09549C03206F80CC003F7D43 /* Careem_Movier.xcdatamodeld in Sources */,
 				09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */,
 				09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */,
