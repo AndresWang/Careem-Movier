@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController {
+class SearchViewController: UITableViewController, SearchViewTrait {
+    let interactor: SearchInteractorDelegate = SearchInteractor()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

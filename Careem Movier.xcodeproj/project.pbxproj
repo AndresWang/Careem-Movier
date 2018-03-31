@@ -15,6 +15,8 @@
 		09549C08206F80CE003F7D43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09549C06206F80CE003F7D43 /* LaunchScreen.storyboard */; };
 		09549C13206F80CE003F7D43 /* Careem_MovierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C12206F80CE003F7D43 /* Careem_MovierTests.swift */; };
 		09549C1E206F80CE003F7D43 /* Careem_MovierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C1D206F80CE003F7D43 /* Careem_MovierUITests.swift */; };
+		09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2B206F8359003F7D43 /* SearchViewTrait.swift */; };
+		09549C2E206F83A3003F7D43 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2D206F83A3003F7D43 /* SearchInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		09549C19206F80CE003F7D43 /* Careem MovierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Careem MovierUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09549C1D206F80CE003F7D43 /* Careem_MovierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Careem_MovierUITests.swift; sourceTree = "<group>"; };
 		09549C1F206F80CE003F7D43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09549C2B206F8359003F7D43 /* SearchViewTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTrait.swift; sourceTree = "<group>"; };
+		09549C2D206F83A3003F7D43 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				09549BFA206F80CC003F7D43 /* AppDelegate.swift */,
+				09549C2B206F8359003F7D43 /* SearchViewTrait.swift */,
+				09549C2D206F83A3003F7D43 /* SearchInteractor.swift */,
 				09549BFC206F80CC003F7D43 /* SearchViewController.swift */,
 				09549BFE206F80CC003F7D43 /* Main.storyboard */,
 				09549C04206F80CE003F7D43 /* Assets.xcassets */,
@@ -260,8 +266,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				09549C03206F80CC003F7D43 /* Careem_Movier.xcdatamodeld in Sources */,
+				09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */,
 				09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */,
 				09549BFB206F80CC003F7D43 /* AppDelegate.swift in Sources */,
+				09549C2E206F83A3003F7D43 /* SearchInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
