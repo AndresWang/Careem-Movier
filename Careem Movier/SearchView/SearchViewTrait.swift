@@ -45,8 +45,7 @@ extension SearchViewTrait where Self: UITableViewController {
         search.obscuresBackgroundDuringPresentation = false
         search.definesPresentationContext = true
         search.searchBar.delegate = self
-        search.searchBar.placeholder = NSLocalizedString("Movie Title", comment: "A placeholder to search movie" )
-        search.searchBar.tintColor = #colorLiteral(red: 0.9071379304, green: 0.2433879375, blue: 0.2114798129, alpha: 1)
+        search.searchBar.placeholder = NSLocalizedString("Movie Name", comment: "A placeholder to search movie" )
         navigationItem.searchController = search
         search.searchBar.accessibilityIdentifier = "mySearchBar"
         
@@ -62,7 +61,7 @@ extension SearchViewTrait where Self: UITableViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {self.navigationItem.searchController?.isActive = true}
     }
     
-    // MARK: - UITableView DataSource & Delegate
+    // MARK: - UITableView DataSource
     func searchViewNumberOfRows() -> Int {
         if isLoading {return 1}
         if !hasSearched {return 0}

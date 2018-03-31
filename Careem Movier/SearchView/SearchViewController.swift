@@ -22,7 +22,6 @@ class SearchViewController: UITableViewController, SearchViewTrait {
         super.awakeFromNib()
         searchViewAwakeFromNib()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchViewDidLoad()
@@ -32,12 +31,22 @@ class SearchViewController: UITableViewController, SearchViewTrait {
         searchViewDidAppear()
     }
     
-    // MARK: - UITableView DataSource & Delegate
+    // MARK: - UITableView DataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchViewNumberOfRows()
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return searchViewCellForRow(at: indexPath)
+    }
+    
+    // MARK: - UISearchBarDelegate
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchViewSearchButtonClicked(searchBar)
+    }
+    
+    // MARK: - UISearchControllerDelegate
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchViewDidPresentSearchController(searchController)
     }
 }
 

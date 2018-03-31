@@ -23,7 +23,6 @@ protocol APIOutputDelegate: class {
 // Note: MoviedAPI as our DataStoreDelegate
 extension MoviedbAPI: APIDelegate {
     func startDataTask(url: URL) {
-        // Cancel previous task if there is any
         dataTask?.cancel()
         
         // Start URLSession

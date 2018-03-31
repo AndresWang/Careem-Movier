@@ -28,6 +28,8 @@ class SearchInteractor: SearchInteractorDelegate {
         api.startDataTask(url: url)
     }
 }
+
+// MARK: - APIOutputDelegate
 extension SearchInteractor: APIOutputDelegate {
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
         if let error = error as NSError?, error.code == -999 {
