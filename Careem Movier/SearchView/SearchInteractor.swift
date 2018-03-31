@@ -30,10 +30,6 @@ class SearchInteractor: SearchInteractorDelegate {
 }
 extension SearchInteractor: APIOutputDelegate {
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
-        // Preparation (ie: stop activity indicator)
-        DispatchQueue.main.async {self.searchRequest?.prehandler?()}
-        
-        // Handle response
         if let error = error as NSError?, error.code == -999 {
             return // Task was cancelled
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {

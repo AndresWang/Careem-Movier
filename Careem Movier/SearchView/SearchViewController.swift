@@ -12,33 +12,33 @@ import UIKit
 class SearchViewController: UITableViewController, SearchViewTrait {
     var interactor: SearchInteractorDelegate!
     let searchResultCellIdentifier = "SearchResultCell"
-    var activityView: UIVisualEffectView?
+    var nothingFoundCellIdentifier = "NothingFoundCell"
+    var loadingCellIdentifier = "LoadingCell"
     var hasSearched = false
     var isLoading = false
     var selectedIndexPath: IndexPath?
 
+    // MARK: - View LifeCyle
     override func awakeFromNib() {
         super.awakeFromNib()
-        hookUpComponentsAfterAwakeFromNib()
+        searchViewAwakeFromNib()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = SearchRequest(text: "batman", page: 1, prehandler: nil, successHandler: successHandler, errorHandler: errorHandler)
-        interactor.search(request: request)
+        searchViewDidLoad()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchViewDidAppear()
     }
     
-    private func successHandler() {
-        isLoading = false
-        tableView.reloadData()
-        navigationItem.searchController?.isActive = false
+    // MARK: - UITableView DataSource & Delegate
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchViewNumberOfRows()
     }
-    private func errorHandler() {
-        hasSearched = false
-        isLoading = false
-        tableView.reloadData()
-        navigationItem.searchController?.isActive = false
-        showNetworkError()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return searchViewCellForRow(at: indexPath)
     }
 }
 

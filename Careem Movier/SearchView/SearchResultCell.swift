@@ -9,16 +9,21 @@
 import UIKit
 
 class SearchResultCell: UITableViewCell {
-
+    private var downloadTask: URLSessionDownloadTask?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        downloadTask?.cancel()
+        downloadTask = nil
     }
 
+    // MARK: - Boundary Methods
+    func configure(_ result: Movie.Result) {
+        
+    }
 }

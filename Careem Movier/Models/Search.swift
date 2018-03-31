@@ -11,7 +11,6 @@ import Foundation
 struct SearchRequest {
     var text: String
     var page: Int
-    var prehandler: (() -> Void)?
     var successHandler: () -> Void
     var errorHandler: () -> Void
 }
