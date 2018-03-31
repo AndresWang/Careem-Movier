@@ -27,7 +27,7 @@ protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate {
 }
 
 extension SearchViewTrait where Self: UITableViewController {
-    // MARK: - View Life Cycle & Navigation
+    // MARK: - View Life Cycle
     func searchViewAwakeFromNib() {
         // Hook up all components
         let interactor: SearchInteractorDelegate = SearchInteractor()
@@ -71,20 +71,20 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
         if isLoading {
-            let cell = tableView.dequeueReusableCell(withIdentifier: loadingCellIdentifier, for: indexPath)
-            let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
+            let loadingCell = tableView.dequeueReusableCell(withIdentifier: loadingCellIdentifier, for: indexPath)
+            let spinner = loadingCell.viewWithTag(100) as! UIActivityIndicatorView
             spinner.startAnimating()
-            return cell
+            return loadingCell
         }
             
-        let nothingFoundcell = tableView.dequeueReusableCell(withIdentifier: nothingFoundCellIdentifier, for: indexPath)
-        guard let hasResponse = interactor.response else {return nothingFoundcell}
+        let nothingFoundCell = tableView.dequeueReusableCell(withIdentifier: nothingFoundCellIdentifier, for: indexPath)
+        guard let hasResponse = interactor.response else {return nothingFoundCell}
         if hasResponse.results.count == 0 {
-            return nothingFoundcell
+            return nothingFoundCell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
-            cell.configure(hasResponse.results[indexPath.row])
-            return cell
+            let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
+            resultCell.configure(hasResponse.results[indexPath.row])
+            return resultCell
         }
     }
     

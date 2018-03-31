@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Note: A data model for SearchViewTrait to initiate a search request
 struct SearchRequest {
     var text: String
     var page: Int

@@ -25,10 +25,28 @@ extension Data {
 
 extension UIViewController {
     func showNetworkError() {
-        let alert = UIAlertController(title: NSLocalizedString("Whoops...", comment: "Network error title"), message: NSLocalizedString("There was an error accessing Discogs database. Please try again", comment: "Network error message"), preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Whoops...", comment: "Network error title"), message: NSLocalizedString("There was an error accessing Moviedb database. Please try again", comment: "Network error message"), preferredStyle: .alert)
         let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm Button"), style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension UIImageView {
+    func loadImage(url: URL) -> URLSessionDownloadTask {
+        let downloadTask = URLSession.shared.downloadTask(with: url) { [weak self] localURL, response, error in
+            if error == nil, let localURL = localURL, let data = try? Data(contentsOf: localURL), let image = UIImage(data: data) {
+                DispatchQueue.main.async { if let weakSelf = self {weakSelf.image = image}}
+            } else {
+                print("Something wrong with downloading the image")
+            }
+        }
+        downloadTask.resume()
+        return downloadTask
+    }
+    func rounded() {
+        self.layer.cornerRadius = 5.0
+        self.clipsToBounds = true
     }
 }
 
