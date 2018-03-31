@@ -12,6 +12,10 @@ import UIKit
 class SearchViewController: UITableViewController, SearchViewTrait {
     var interactor: SearchInteractorDelegate!
     let searchResultCellIdentifier = "SearchResultCell"
+    var activityView: UIVisualEffectView?
+    var hasSearched = false
+    var isLoading = false
+    var selectedIndexPath: IndexPath?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +24,21 @@ class SearchViewController: UITableViewController, SearchViewTrait {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = SearchRequest(text: "batman", page: 1, prehandler: nil, successHandler: {}, errorHandler: {})
+        let request = SearchRequest(text: "batman", page: 1, prehandler: nil, successHandler: successHandler, errorHandler: errorHandler)
         interactor.search(request: request)
+    }
+    
+    private func successHandler() {
+        isLoading = false
+        tableView.reloadData()
+        navigationItem.searchController?.isActive = false
+    }
+    private func errorHandler() {
+        hasSearched = false
+        isLoading = false
+        tableView.reloadData()
+        navigationItem.searchController?.isActive = false
+        showNetworkError()
     }
 }
 

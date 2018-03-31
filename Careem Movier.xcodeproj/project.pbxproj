@@ -25,6 +25,7 @@
 		09549C3A206F9688003F7D43 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C39206F9688003F7D43 /* Movie.swift */; };
 		09549C3C206FA44D003F7D43 /* APIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C3B206FA44D003F7D43 /* APIDelegate.swift */; };
 		09549C42206FB622003F7D43 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C41206FB622003F7D43 /* Search.swift */; };
+		09549C44206FC143003F7D43 /* ActivityIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C43206FC143003F7D43 /* ActivityIndicatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		09549C39206F9688003F7D43 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		09549C3B206FA44D003F7D43 /* APIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDelegate.swift; sourceTree = "<group>"; };
 		09549C41206FB622003F7D43 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		09549C43206FC143003F7D43 /* ActivityIndicatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 		09549C3F206FA5DF003F7D43 /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
+				09549C43206FC143003F7D43 /* ActivityIndicatable.swift */,
 				09549C2B206F8359003F7D43 /* SearchViewTrait.swift */,
 				09549C2D206F83A3003F7D43 /* SearchInteractor.swift */,
 				09549BFC206F80CC003F7D43 /* SearchViewController.swift */,
@@ -324,6 +327,7 @@
 				09549C42206FB622003F7D43 /* Search.swift in Sources */,
 				09549C32206F8724003F7D43 /* CoreDataStack.swift in Sources */,
 				09549C36206F8D0C003F7D43 /* MoviedbAPI.swift in Sources */,
+				09549C44206FC143003F7D43 /* ActivityIndicatable.swift in Sources */,
 				09549C03206F80CC003F7D43 /* Careem_Movier.xcdatamodeld in Sources */,
 				09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */,
 				09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */,

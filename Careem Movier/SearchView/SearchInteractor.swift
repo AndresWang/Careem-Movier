@@ -30,7 +30,6 @@ class SearchInteractor: SearchInteractorDelegate {
 }
 extension SearchInteractor: APIOutputDelegate {
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
-        print(#function)
         // Preparation (ie: stop activity indicator)
         DispatchQueue.main.async {self.searchRequest?.prehandler?()}
         
@@ -54,6 +53,5 @@ extension SearchInteractor: APIOutputDelegate {
     // MARK: Private Methods
     private func process(_ data: Data) {
         response = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
-        print(response)
     }
 }

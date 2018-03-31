@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Note: Our own data model just in case​ ​we​ ​are​ ​asked​ ​to​ ​change​ ​to​ ​xml-based​ ​api​ ​instead​ ​of​ ​json, separation of concerns.
+// Note: Our own data model separated from api model just in case​ ​we​ ​are​ ​asked​ ​to​ ​change​ ​to​ ​xml-based​ ​api​ ​instead​ ​of​ ​json, separation of concerns.
 struct Movie {
     struct Response {
         var page: Int
