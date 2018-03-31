@@ -37,7 +37,8 @@ extension SearchInteractor: APIOutputDelegate {
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             if let data = data {
                 self.process(data)
-                DispatchQueue.main.async {self.searchRequest?.successHandler()}
+                let hasResults = (self.response?.results?.count ?? 0) > 0
+                DispatchQueue.main.async {self.searchRequest?.successHandler(hasResults)}
                 return /* Exit the closure */
             }
         } else {

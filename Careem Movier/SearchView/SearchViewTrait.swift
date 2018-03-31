@@ -12,10 +12,8 @@ import UIKit
 // Note: SearchViewTrait and its extension not noly make our searchViewController extremely light, but also make its code shareable for all UITableViewControllers. This is protocol oriented programming's composition. I prefer composition over inheritance, because it is much more flexible. I used this technique in my own project because I have four UITableViewControllers which need the same essential funtionality, but each view still has its own specialties.
 protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate {
     var interactor: SearchInteractorDelegate! {get set}
-    var hasSearched: Bool {get set}
     var isLoading: Bool {get set}
     var searchResultCellIdentifier: String {get}
-    var nothingFoundCellIdentifier: String {get}
     var loadingCellIdentifier: String {get}
     func searchViewAwakeFromNib()
     func searchViewDidLoad()
@@ -50,9 +48,7 @@ extension SearchViewTrait where Self: UITableViewController {
         search.searchBar.accessibilityIdentifier = "mySearchBar"
         
         // Register Nibs
-        let nothingFoundCellNib = UINib(nibName: nothingFoundCellIdentifier, bundle: nil)
         let loadingCellNib = UINib(nibName: loadingCellIdentifier, bundle: nil)
-        tableView.register(nothingFoundCellNib, forCellReuseIdentifier: nothingFoundCellIdentifier)
         tableView.register(loadingCellNib, forCellReuseIdentifier: loadingCellIdentifier)
     }
     func searchViewDidAppear() {
@@ -64,8 +60,7 @@ extension SearchViewTrait where Self: UITableViewController {
     // MARK: - UITableView DataSource
     func searchViewNumberOfRows() -> Int {
         if isLoading {return 1}
-        if !hasSearched {return 0}
-        guard let response = interactor.response, let results = response.results, results.count > 0 else {return 1}
+        guard let response = interactor.response, let results = response.results, results.count > 0 else {return 0}
         return results.count
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
@@ -76,13 +71,8 @@ extension SearchViewTrait where Self: UITableViewController {
             return loadingCell
         }
         
-        guard let response = interactor.response, let results = response.results, results.count > 0 else {
-            let nothingFoundCell = tableView.dequeueReusableCell(withIdentifier: nothingFoundCellIdentifier, for: indexPath)
-            return nothingFoundCell
-        }
-        
         let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
-        resultCell.configure(response.results![indexPath.row])
+        resultCell.configure(interactor.response!.results![indexPath.row])
         return resultCell
     }
     
@@ -93,7 +83,6 @@ extension SearchViewTrait where Self: UITableViewController {
         tableView.contentOffset = .zero
         isLoading = true
         tableView.reloadData()
-        hasSearched = true
         let request = SearchRequest(text: text, page: 1, successHandler: successHandler, errorHandler: errorHandler)
         interactor.search(request: request)
     }
@@ -104,13 +93,13 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     
     // MARK: - Private Methods
-    private func successHandler() {
+    private func successHandler(hasResults: Bool) {
         isLoading = false
         tableView.reloadData()
         navigationItem.searchController?.isActive = false
+        if hasResults == false {showNothingFoundError()}
     }
     private func errorHandler() {
-        hasSearched = false
         isLoading = false
         tableView.reloadData()
         navigationItem.searchController?.isActive = false

@@ -12,9 +12,7 @@ import UIKit
 class SearchViewController: UITableViewController, SearchViewTrait {
     var interactor: SearchInteractorDelegate!
     let searchResultCellIdentifier = "SearchResultCell"
-    var nothingFoundCellIdentifier = "NothingFoundCell"
     var loadingCellIdentifier = "LoadingCell"
-    var hasSearched = false
     var isLoading = false
 
     // MARK: - View LifeCyle

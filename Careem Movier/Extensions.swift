@@ -25,7 +25,13 @@ extension Data {
 
 extension UIViewController {
     func showNetworkError() {
-        let alert = UIAlertController(title: NSLocalizedString("Whoops...", comment: "Network error title"), message: NSLocalizedString("There was an error accessing Moviedb database. Please try again", comment: "Network error message"), preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Whoops...", comment: "Network error title"), message: NSLocalizedString("There was an error accessing Moviedb database. Please try again.", comment: "Network error message"), preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm Button"), style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    func showNothingFoundError() {
+        let alert = UIAlertController(title: NSLocalizedString("Sorry...", comment: "Nothing found error title"), message: NSLocalizedString("Nothing found in our database. Please try other names.", comment: "Nothing found error message"), preferredStyle: .alert)
         let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm Button"), style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
