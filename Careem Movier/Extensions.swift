@@ -8,4 +8,17 @@
 
 import Foundation
 
+// Note: A generic function for parsing data to all type of json struct
+extension Data {
+    func parseTo<T: Codable>(jsonType: T.Type) -> T? {
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(jsonType, from: self)
+            return result
+        } catch {
+            print("JSON Error: \(error)")
+            return nil
+        }
+    }
+}
 

@@ -23,6 +23,10 @@ protocol APIOutputDelegate: class {
 // Note: MoviedAPI as our DataStoreDelegate
 extension MoviedbAPI: APIDelegate {
     func startDataTask(url: URL) {
+        // Cancel previous task if there is any
+        dataTask?.cancel()
+        
+        // Start URLSession
         let session = URLSession.shared
         dataTask = session.dataTask(with: url) { data, response, error in
             self.output?.didRecieveResponse(data: data, response: response, error: error)

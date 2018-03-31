@@ -20,6 +20,8 @@ class SearchViewController: UITableViewController, SearchViewTrait {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let request = SearchRequest(text: "batman", page: 1, prehandler: nil, successHandler: {}, errorHandler: {})
+        interactor.search(request: request)
     }
 }
 

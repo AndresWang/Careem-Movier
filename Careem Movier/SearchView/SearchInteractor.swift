@@ -12,17 +12,48 @@ import Foundation
 protocol SearchInteractorDelegate {
     var response: Movie.Response? {get}
     func setUpAPI()
+    func search(request: SearchRequest)
 }
 class SearchInteractor: SearchInteractorDelegate {
     private var api: APIDelegate!
     private(set) var response: Movie.Response?
+    private var searchRequest: SearchRequest?
     
     func setUpAPI() {
         self.api = MoviedbAPI(output: self)
     }
+    func search(request: SearchRequest) {
+        self.searchRequest = request
+        let url = MoviedbAPI.searchURL(with: request.text, page: request.page)
+        api.startDataTask(url: url)
+    }
 }
 extension SearchInteractor: APIOutputDelegate {
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
+        print(#function)
+        // Preparation (ie: stop activity indicator)
+        DispatchQueue.main.async {self.searchRequest?.prehandler?()}
         
+        // Handle response
+        if let error = error as NSError?, error.code == -999 {
+            return // Task was cancelled
+        } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+            if let data = data {
+                self.process(data)
+                DispatchQueue.main.async {self.searchRequest?.successHandler()}
+                return /* Exit the closure */
+            }
+        } else {
+            print("URLSession Failure! \(String(describing: response))")
+        }
+        
+        // Handle errors
+        DispatchQueue.main.async {self.searchRequest?.errorHandler()}
+    }
+    
+    // MARK: Private Methods
+    private func process(_ data: Data) {
+        response = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
+        print(response)
     }
 }
