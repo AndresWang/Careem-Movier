@@ -10,12 +10,16 @@ import UIKit
 
 // Note: SearchViewController is merely a coordinator between its interactor and its subviews.
 class SearchViewController: UITableViewController, SearchViewTrait {
-    let interactor: SearchInteractorDelegate = SearchInteractor()
+    var interactor: SearchInteractorDelegate!
     let searchResultCellIdentifier = "SearchResultCell"
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        hookUpComponentsAfterAwakeFromNib()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 }
 

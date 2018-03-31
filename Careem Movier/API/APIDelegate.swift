@@ -25,8 +25,8 @@ extension MoviedbAPI: APIDelegate {
     func startDataTask(url: URL) {
         let session = URLSession.shared
         dataTask = session.dataTask(with: url) { data, response, error in
-            output?.didRecieveResponse(data: data, response: response, error: error)
+            self.output?.didRecieveResponse(data: data, response: response, error: error)
         }
-        dataTask.resume()
+        dataTask?.resume()
     }
 }

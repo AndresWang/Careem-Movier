@@ -10,7 +10,7 @@ import Foundation
 
 class MoviedbAPI {
     weak var output: APIOutputDelegate?
-    var searchTask: URLSessionDataTask?
+    var dataTask: URLSessionDataTask?
     
     init(output: APIOutputDelegate) {
         self.output = output
