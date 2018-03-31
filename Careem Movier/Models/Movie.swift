@@ -14,12 +14,12 @@ struct Movie {
         var page: Int
         var total_results: Int
         var total_pages: Int
-        var results: [Result]
+        var results: [Result]?
     }
     struct Result {
         var title: String
-        var poster_path: String
-        var overview: String
-        var release_date: String
+        var poster_path: String?
+        var overview: String?
+        var release_date: String?
     }
 }

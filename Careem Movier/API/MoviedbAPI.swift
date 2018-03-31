@@ -28,15 +28,15 @@ class MoviedbAPI {
             var page: Int
             var total_results: Int
             var total_pages: Int
-            var results: [Result]
+            var results: [Result]?
             
             func toMovie() -> Movie.Response {
-                return Movie.Response(page: page, total_results: total_results, total_pages: total_pages, results: results.map{$0.toMovie()})
+                return Movie.Response(page: page, total_results: total_results, total_pages: total_pages, results: results?.map{$0.toMovie()})
             }
         }
         struct Result: Codable {
             var title: String
-            var poster_path: String
+            var poster_path: String?
             var overview: String
             var release_date: String
             

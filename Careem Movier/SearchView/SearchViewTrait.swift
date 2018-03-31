@@ -65,8 +65,8 @@ extension SearchViewTrait where Self: UITableViewController {
     func searchViewNumberOfRows() -> Int {
         if isLoading {return 1}
         if !hasSearched {return 0}
-        guard let hasResponse = interactor.response else {return 1}
-        return hasResponse.results.count
+        guard let response = interactor.response, let results = response.results, results.count > 0 else {return 1}
+        return results.count
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
         if isLoading {
@@ -75,16 +75,15 @@ extension SearchViewTrait where Self: UITableViewController {
             spinner.startAnimating()
             return loadingCell
         }
-            
-        let nothingFoundCell = tableView.dequeueReusableCell(withIdentifier: nothingFoundCellIdentifier, for: indexPath)
-        guard let hasResponse = interactor.response else {return nothingFoundCell}
-        if hasResponse.results.count == 0 {
+        
+        guard let response = interactor.response, let results = response.results, results.count > 0 else {
+            let nothingFoundCell = tableView.dequeueReusableCell(withIdentifier: nothingFoundCellIdentifier, for: indexPath)
             return nothingFoundCell
-        } else {
-            let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
-            resultCell.configure(hasResponse.results[indexPath.row])
-            return resultCell
         }
+        
+        let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
+        resultCell.configure(response.results![indexPath.row])
+        return resultCell
     }
     
     // MARK: - UISearchBarDelegate
