@@ -12,7 +12,6 @@ import UIKit
 // Note: SearchViewTrait and its extension not noly make our searchViewController extremely light, but also make its code shareable for all UITableViewControllers. This is protocol oriented programming's composition. I prefer composition over inheritance, because it is much more flexible. I used this technique in my own project because I have four UITableViewControllers which need the same essential funtionality, but each view still has its own specialties.
 protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate, ActivityIndicatable {
     var interactor: SearchInteractorDelegate! {get set}
-    var searchResultCellIdentifier: String {get}
     func searchViewAwakeFromNib()
     func searchViewDidLoad()
     func searchViewDidAppear()
@@ -57,7 +56,7 @@ extension SearchViewTrait where Self: UITableViewController {
         return numberOfRows
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
-        let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
+        let resultCell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         resultCell.configure(interactor.searchResponse!.results![indexPath.row])
         return resultCell
     }

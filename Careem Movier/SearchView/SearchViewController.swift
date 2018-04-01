@@ -11,7 +11,6 @@ import UIKit
 // Note: SearchViewController is merely a coordinator between its interactor and its subviews.
 class SearchViewController: UITableViewController, SearchViewTrait {
     var interactor: SearchInteractorDelegate!
-    let searchResultCellIdentifier = "SearchResultCell"
     var activityView: UIVisualEffectView?
 
     // MARK: - View LifeCyle
