@@ -12,8 +12,7 @@ import UIKit
 class SearchViewController: UITableViewController, SearchViewTrait {
     var interactor: SearchInteractorDelegate!
     let searchResultCellIdentifier = "SearchResultCell"
-    var loadingCellIdentifier = "LoadingCell"
-    var isLoading = false
+    var activityView: UIVisualEffectView?
 
     // MARK: - View LifeCyle
     override func awakeFromNib() {

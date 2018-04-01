@@ -10,11 +10,9 @@ import Foundation
 import UIKit
 
 // Note: SearchViewTrait and its extension not noly make our searchViewController extremely light, but also make its code shareable for all UITableViewControllers. This is protocol oriented programming's composition. I prefer composition over inheritance, because it is much more flexible. I used this technique in my own project because I have four UITableViewControllers which need the same essential funtionality, but each view still has its own specialties.
-protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate {
+protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate, ActivityIndicatable {
     var interactor: SearchInteractorDelegate! {get set}
-    var isLoading: Bool {get set}
     var searchResultCellIdentifier: String {get}
-    var loadingCellIdentifier: String {get}
     func searchViewAwakeFromNib()
     func searchViewDidLoad()
     func searchViewDidAppear()
@@ -46,10 +44,6 @@ extension SearchViewTrait where Self: UITableViewController {
         search.searchBar.placeholder = NSLocalizedString("Movie Name", comment: "A placeholder to search movie" )
         navigationItem.searchController = search
         search.searchBar.accessibilityIdentifier = "mySearchBar"
-        
-        // Register Nibs
-        let loadingCellNib = UINib(nibName: loadingCellIdentifier, bundle: nil)
-        tableView.register(loadingCellNib, forCellReuseIdentifier: loadingCellIdentifier)
     }
     func searchViewDidAppear() {
         // Call keyboard up only for first time
@@ -59,18 +53,10 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - UITableView DataSource
     func searchViewNumberOfRows() -> Int {
-        if isLoading {return 1}
         guard let response = interactor.searchResponse, let results = response.results, results.count > 0 else {return 0}
         return results.count
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
-        if isLoading {
-            let loadingCell = tableView.dequeueReusableCell(withIdentifier: loadingCellIdentifier, for: indexPath)
-            let spinner = loadingCell.viewWithTag(100) as! UIActivityIndicatorView
-            spinner.startAnimating()
-            return loadingCell
-        }
-        
         let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
         resultCell.configure(interactor.searchResponse!.results![indexPath.row])
         return resultCell
@@ -81,11 +67,9 @@ extension SearchViewTrait where Self: UITableViewController {
         // Basically We will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts.
         guard let text = searchBar.text, !text.isEmpty else {print("No String Entered");searchBar.resignFirstResponder();return}
         searchBar.resignFirstResponder()
-        tableView.contentOffset = .zero
-        isLoading = true
-        tableView.reloadData()
         
         let request = SearchRequest(text: text, page: 1, successHandler: successHandler, errorHandler: errorHandler)
+        startActivityIndicator()
         interactor.search(request: request)
     }
     
@@ -96,9 +80,8 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - Private Methods
     private func successHandler(searchText: String?) {
-        isLoading = false
-        tableView.reloadData()
-        navigationItem.searchController?.isActive = false
+        stopActivityIndicator()
+        endSearch()
         if let text = searchText {
             interactor.saveSuccessfulQuery(searchText: text)
         } else {
@@ -106,9 +89,12 @@ extension SearchViewTrait where Self: UITableViewController {
         }
     }
     private func errorHandler() {
-        isLoading = false
+        stopActivityIndicator()
+        endSearch()
+        showNetworkError()
+    }
+    private func endSearch() {
         tableView.reloadData()
         navigationItem.searchController?.isActive = false
-        showNetworkError()
     }
 }
