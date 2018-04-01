@@ -23,6 +23,7 @@ class MoviedbAPI {
         case extraLarge = "/w780"
     }
     
+    // MARK: - JSON
     struct JSON {
         struct Response: Codable {
             var page: Int

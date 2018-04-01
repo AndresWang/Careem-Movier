@@ -24,7 +24,7 @@ class ManagedQuery: NSManagedObject {
         case date
     }
     
-    // MARK: Helper Methods
+    // MARK: - Helper Methods
     class func entityName() -> String {
         return "ManagedQuery"
     }

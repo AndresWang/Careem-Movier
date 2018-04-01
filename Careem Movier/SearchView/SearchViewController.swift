@@ -27,7 +27,7 @@ class SearchViewController: UITableViewController, SearchViewTrait {
         searchViewDidAppear()
     }
     
-    // MARK: - UITableView DataSource
+    // MARK: - UITableView DataSource & Delegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchViewNumberOfRows()
     }

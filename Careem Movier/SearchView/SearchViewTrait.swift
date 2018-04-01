@@ -50,7 +50,7 @@ extension SearchViewTrait where Self: UITableViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {self.navigationItem.searchController?.isActive = true}
     }
     
-    // MARK: - UITableView DataSource
+    // MARK: - UITableView DataSource & Delegate
     func searchViewNumberOfRows() -> Int {
         let numberOfRows = interactor.searchResponse?.results?.count ?? 0
         return numberOfRows
