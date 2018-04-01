@@ -59,6 +59,11 @@ extension SearchViewTrait where Self: UITableViewController {
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
         let resultCell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         resultCell.configure(interactor.searchResponse!.results![indexPath.row])
+        if shouldLoadMore(indexPath) {
+            print("Sould Load More")
+            interactor.loadMore()
+            startActivityIndicator()
+        }
         return resultCell
     }
     
@@ -79,8 +84,10 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     
     // MARK: - Private Methods
-    private func successHandler(searchText: String?) {
+    private func successHandler(searchText: String?, isLoadMore: Bool) {
         endSearch()
+        
+        guard isLoadMore == false else {return}
         if let text = searchText {
             interactor.saveSuccessfulQuery(searchText: text)
         } else {
@@ -95,5 +102,10 @@ extension SearchViewTrait where Self: UITableViewController {
         stopActivityIndicator()
         tableView.reloadData()
         navigationItem.searchController?.isActive = false
+    }
+    private func shouldLoadMore(_ indexPath: IndexPath) -> Bool {
+        guard let searchResponse = interactor.searchResponse, let results = searchResponse.results, activityView == nil else {return false}
+        print("indexPath.row(\(indexPath.row)) == last(\(results.count - 1)), totalPages(\(searchResponse.total_pages)) > page(\(searchResponse.page))")
+        return indexPath.row == results.count - 1 && searchResponse.total_pages > searchResponse.page
     }
 }

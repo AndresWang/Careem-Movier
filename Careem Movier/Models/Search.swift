@@ -12,6 +12,7 @@ import Foundation
 struct SearchRequest {
     var text: String
     var page: Int
-    var successHandler: (String?) -> Void // Search text != nil -> Successful Query
+    // (searchText: String?, isLoadMore: Bool), searchText != nil means a successful query
+    var successHandler: (String?, Bool) -> Void
     var errorHandler: () -> Void
 }

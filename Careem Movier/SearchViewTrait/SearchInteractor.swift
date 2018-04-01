@@ -14,12 +14,14 @@ protocol SearchInteractorDelegate: APIOutputDelegate {
     func configure()
     func search(request: SearchRequest)
     func saveSuccessfulQuery(searchText: String)
+    func loadMore()
 }
 class SearchInteractor: SearchInteractorDelegate {
     private var api: APIDelegate!
     private var dataStore: DataStoreDelegate!
     private var searchRequest: SearchRequest?
     private(set) var searchResponse: Movie.Response?
+    private var isLoadMore = false
     
     // MARK: - Boundary Methods
     // MARK: SearchInteractorDelegate
@@ -28,12 +30,20 @@ class SearchInteractor: SearchInteractorDelegate {
         self.dataStore = CoreDataStore.sharedInstance
     }
     func search(request: SearchRequest) {
+        isLoadMore = false
         self.searchRequest = request
         let url = MoviedbAPI.searchURL(with: request.text, page: request.page)
         api.startDataTask(url: url)
     }
     func saveSuccessfulQuery(searchText: String) {
         dataStore.saveSuccessfulQuery(text: searchText)
+    }
+    func loadMore() {
+        isLoadMore = true
+        searchRequest?.page += 1
+        print(searchRequest!.page)
+        let url = MoviedbAPI.searchURL(with: searchRequest!.text, page: searchRequest!.page)
+        api.startDataTask(url: url)
     }
     
     // MARK: APIOutputDelegate
@@ -42,10 +52,7 @@ class SearchInteractor: SearchInteractorDelegate {
             return // Task was cancelled, should fail silently
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             if let data = data {
-                searchResponse = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
-                let resultCount = searchResponse?.results?.count ?? 0
-                let searchText = resultCount > 0 ? searchRequest!.text : nil
-                DispatchQueue.main.async {self.searchRequest?.successHandler(searchText)}
+                process(data)
                 return /* Exit */
             }
         } else {
@@ -54,5 +61,19 @@ class SearchInteractor: SearchInteractorDelegate {
         
         // Handle errors
         DispatchQueue.main.async {self.searchRequest?.errorHandler()}
+    }
+    
+    // MARK: Private Methods
+    func process(_ data: Data) {
+        if isLoadMore {
+            guard let newResults = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie().results else {return}
+            searchResponse?.page += 1
+            searchResponse?.results?.append(contentsOf: newResults)
+        } else {
+            searchResponse = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
+        }
+        let resultCount = searchResponse?.results?.count ?? 0
+        let searchText = resultCount > 0 ? searchRequest!.text : nil
+        DispatchQueue.main.async {self.searchRequest?.successHandler(searchText, self.isLoadMore)}
     }
 }
