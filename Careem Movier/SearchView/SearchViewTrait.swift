@@ -64,13 +64,13 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - UISearchBarDelegate
     func searchViewSearchButtonClicked(_ searchBar: UISearchBar) {
-        // Basically We will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts.
+        // Basically We will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts. But the safer the better.
         guard let text = searchBar.text, !text.isEmpty else {print("No String Entered");searchBar.resignFirstResponder();return}
         searchBar.resignFirstResponder()
         
         let request = SearchRequest(text: text, page: 1, successHandler: successHandler, errorHandler: errorHandler)
-        startActivityIndicator()
         interactor.search(request: request)
+        startActivityIndicator()
     }
     
     // MARK: - UISearchControllerDelegate
@@ -80,7 +80,6 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - Private Methods
     private func successHandler(searchText: String?) {
-        stopActivityIndicator()
         endSearch()
         if let text = searchText {
             interactor.saveSuccessfulQuery(searchText: text)
@@ -89,11 +88,11 @@ extension SearchViewTrait where Self: UITableViewController {
         }
     }
     private func errorHandler() {
-        stopActivityIndicator()
         endSearch()
         showNetworkError()
     }
     private func endSearch() {
+        stopActivityIndicator()
         tableView.reloadData()
         navigationItem.searchController?.isActive = false
     }
