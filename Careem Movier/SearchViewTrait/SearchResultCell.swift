@@ -37,7 +37,7 @@ class SearchResultCell: UITableViewCell {
             poster.image = UIImage(imageLiteralResourceName: "noImage")
         }
         name.text = result.title
-        releaseDate.text = result.release_date
+        releaseDate.text = result.release_date?.moviedbDateFormat() ?? NSLocalizedString("Unknown", comment: "Unknown release date")
         overview.text = result.overview
     }
 }
