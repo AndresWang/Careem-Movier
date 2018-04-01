@@ -29,7 +29,7 @@ extension SearchViewTrait where Self: UITableViewController {
     func searchViewAwakeFromNib() {
         // Hook up all components
         let interactor: SearchInteractorDelegate = SearchInteractor()
-        interactor.setUpAPI()
+        interactor.configure()
         self.interactor = interactor
     }
     func searchViewDidLoad() {
@@ -53,14 +53,14 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     func searchViewDidAppear() {
         // Call keyboard up only for first time
-        guard interactor.response == nil else {return}
+        guard interactor.searchResponse == nil else {return}
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {self.navigationItem.searchController?.isActive = true}
     }
     
     // MARK: - UITableView DataSource
     func searchViewNumberOfRows() -> Int {
         if isLoading {return 1}
-        guard let response = interactor.response, let results = response.results, results.count > 0 else {return 0}
+        guard let response = interactor.searchResponse, let results = response.results, results.count > 0 else {return 0}
         return results.count
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
@@ -72,7 +72,7 @@ extension SearchViewTrait where Self: UITableViewController {
         }
         
         let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
-        resultCell.configure(interactor.response!.results![indexPath.row])
+        resultCell.configure(interactor.searchResponse!.results![indexPath.row])
         return resultCell
     }
     
@@ -95,11 +95,15 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     
     // MARK: - Private Methods
-    private func successHandler(hasResults: Bool) {
+    private func successHandler(searchText: String?) {
         isLoading = false
         tableView.reloadData()
         navigationItem.searchController?.isActive = false
-        if hasResults == false {showNothingFoundError()}
+        if let text = searchText {
+            interactor.saveSuccessfulQuery(searchText: text)
+        } else {
+            showNothingFoundError()
+        }
     }
     private func errorHandler() {
         isLoading = false

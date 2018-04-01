@@ -10,22 +10,29 @@ import Foundation
 
 // Note: SearchInteractor is the domain object for SearchViewTrait, a manager for all data manipulations, normally it will ask database or api worker for data and report the result to its viewController. We use SearchInteractorDelegate as interface just in case we may change our domain object. This interface is searchViewTrait's viewcontroller's only output.
 protocol SearchInteractorDelegate {
-    var response: Movie.Response? {get}
-    func setUpAPI()
+    var searchResponse: Movie.Response? {get}
+    func configure()
     func search(request: SearchRequest)
+    func saveSuccessfulQuery(searchText: String)
 }
 class SearchInteractor: SearchInteractorDelegate {
     private var api: APIDelegate!
-    private(set) var response: Movie.Response?
+    private var dataStore: DataStoreDelegate!
     private var searchRequest: SearchRequest?
+    private(set) var searchResponse: Movie.Response?
     
-    func setUpAPI() {
+    // MARK: - Boundary Methods
+    func configure() {
         self.api = MoviedbAPI(output: self)
+        self.dataStore = CoreDataStore.sharedInstance
     }
     func search(request: SearchRequest) {
         self.searchRequest = request
         let url = MoviedbAPI.searchURL(with: request.text, page: request.page)
         api.startDataTask(url: url)
+    }
+    func saveSuccessfulQuery(searchText: String) {
+        dataStore.saveSuccessfulQuery(text: searchText)
     }
 }
 
@@ -36,10 +43,11 @@ extension SearchInteractor: APIOutputDelegate {
             return // Task was cancelled, should fail silently
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             if let data = data {
-                self.process(data)
-                let hasResults = (self.response?.results?.count ?? 0) > 0
-                DispatchQueue.main.async {self.searchRequest?.successHandler(hasResults)}
-                return /* Exit the closure */
+                searchResponse = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
+                let resultCount = searchResponse?.results?.count ?? 0
+                let searchText = resultCount > 0 ? searchRequest!.text : nil
+                DispatchQueue.main.async {self.searchRequest?.successHandler(searchText)}
+                return /* Exit */
             }
         } else {
             print("URLSession Failure! \(String(describing: response))")
@@ -47,10 +55,5 @@ extension SearchInteractor: APIOutputDelegate {
         
         // Handle errors
         DispatchQueue.main.async {self.searchRequest?.errorHandler()}
-    }
-    
-    // MARK: Private Methods
-    private func process(_ data: Data) {
-        response = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
     }
 }
