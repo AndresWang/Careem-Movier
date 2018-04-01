@@ -36,8 +36,9 @@ class SearchResultCell: UITableViewCell {
             print("\(result.title) doesn't have poster")
             poster.image = UIImage(imageLiteralResourceName: "noImage")
         }
+        let unknownText = NSLocalizedString("N/A", comment: "Unknown release date")
         name.text = result.title
-        releaseDate.text = result.release_date?.moviedbDateFormat() ?? NSLocalizedString("Unknown", comment: "Unknown release date")
-        overview.text = result.overview
+        releaseDate.text = result.release_date ?? unknownText
+        overview.text = result.overview ?? unknownText
     }
 }

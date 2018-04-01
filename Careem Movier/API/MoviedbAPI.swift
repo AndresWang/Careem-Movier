@@ -42,16 +42,12 @@ class MoviedbAPI {
             var release_date: String
             
             func toMovie() -> Movie.Result {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = MoviedbAPI.dateFormat
-                let date = dateFormatter.date(from:release_date)
-                return Movie.Result(title: title, poster_path: poster_path, overview: overview, release_date: date)
+                return Movie.Result(title: title, poster_path: poster_path, overview: overview, release_date: release_date)
             }
         }
     }
     
     // MARK: - Helper Methods
-    static let dateFormat = "yyyy-mm-dd"
     static func searchURL(with text: String, page: Int) -> URL {
         let encodedText = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         let searchTerm = String(format: "https://api.themoviedb.org/3/search/movie?api_key=2696829a81b1b5827d515ff121700838&query=%@&page=%ld", encodedText, page)

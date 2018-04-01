@@ -43,7 +43,6 @@ class SearchInteractor: SearchInteractorDelegate {
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             if let data = data {
                 searchResponse = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
-                searchResponse?.results?.sort(by: newestFirst)
                 let resultCount = searchResponse?.results?.count ?? 0
                 let searchText = resultCount > 0 ? searchRequest!.text : nil
                 DispatchQueue.main.async {self.searchRequest?.successHandler(searchText)}
@@ -55,15 +54,5 @@ class SearchInteractor: SearchInteractorDelegate {
         
         // Handle errors
         DispatchQueue.main.async {self.searchRequest?.errorHandler()}
-    }
-    
-    // MARK: - Private Methods
-    // Note: Search result always show newest movie at top
-    private func newestFirst (lhs: Movie.Result, rhs: Movie.Result) -> Bool {
-        let seventyYears: TimeInterval = 70 * 12 * 30 * 24 * 60 * 60
-        let veryOldDate = Date(timeIntervalSince1970: -seventyYears)
-        let lhsDate = lhs.release_date ?? veryOldDate
-        let rhsDate = rhs.release_date ?? veryOldDate
-        return lhsDate > rhsDate
     }
 }

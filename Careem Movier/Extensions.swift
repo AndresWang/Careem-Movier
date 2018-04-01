@@ -57,14 +57,6 @@ extension UIImageView {
     }
 }
 
-extension Date {
-    func moviedbDateFormat() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = MoviedbAPI.dateFormat
-        return dateFormatter.string(from: self)
-    }
-}
-
 extension UIView {
     func showActivityPanel(message: String) -> UIVisualEffectView {
         // Label Width

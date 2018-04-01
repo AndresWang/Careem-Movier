@@ -20,6 +20,6 @@ struct Movie {
         var title: String
         var poster_path: String?
         var overview: String?
-        var release_date: Date?
+        var release_date: String?
     }
 }
