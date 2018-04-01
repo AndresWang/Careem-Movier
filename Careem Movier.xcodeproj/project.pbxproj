@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092AA1BC2070C020000E676D /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092AA1BB2070C020000E676D /* Query.swift */; };
 		09549BFB206F80CC003F7D43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549BFA206F80CC003F7D43 /* AppDelegate.swift */; };
 		09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549BFC206F80CC003F7D43 /* SearchViewController.swift */; };
 		09549C00206F80CC003F7D43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09549BFE206F80CC003F7D43 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		092AA1BB2070C020000E676D /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		09549BF7206F80CC003F7D43 /* Careem Movier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Careem Movier.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09549BFA206F80CC003F7D43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09549BFC206F80CC003F7D43 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				09549C39206F9688003F7D43 /* Movie.swift */,
 				09549C41206FB622003F7D43 /* Search.swift */,
+				092AA1BB2070C020000E676D /* Query.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */,
 				09549C3C206FA44D003F7D43 /* APIDelegate.swift in Sources */,
 				09549C38206F9067003F7D43 /* Extensions.swift in Sources */,
+				092AA1BC2070C020000E676D /* Query.swift in Sources */,
 				09549BFB206F80CC003F7D43 /* AppDelegate.swift in Sources */,
 				09549C30206F8639003F7D43 /* SearchResultCell.swift in Sources */,
 				09549C34206F8831003F7D43 /* DataStoreDelegate.swift in Sources */,
