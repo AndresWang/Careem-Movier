@@ -9,7 +9,7 @@
 import Foundation
 
 // Note: SearchInteractor is the domain object for SearchViewTrait, a manager for all data manipulations, normally it will ask database or api worker for data and report the result to its viewController. We use SearchInteractorDelegate as interface just in case we may change our domain object. This interface is searchViewTrait's viewcontroller's only output.
-protocol SearchInteractorDelegate {
+protocol SearchInteractorDelegate: APIOutputDelegate {
     var searchResponse: Movie.Response? {get}
     func configure()
     func search(request: SearchRequest)
@@ -34,10 +34,8 @@ class SearchInteractor: SearchInteractorDelegate {
     func saveSuccessfulQuery(searchText: String) {
         dataStore.saveSuccessfulQuery(text: searchText)
     }
-}
-
-// MARK: - APIOutputDelegate
-extension SearchInteractor: APIOutputDelegate {
+    
+    // MARK: - APIOutputDelegate
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
         if let error = error as NSError?, error.code == -999 {
             return // Task was cancelled, should fail silently
