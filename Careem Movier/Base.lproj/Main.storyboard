@@ -48,11 +48,15 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYa-n7-CMI" userLabel="Overview">
-                                                    <rect key="frame" x="0.0" y="48.5" width="60.5" height="90.5"/>
+                                                    <rect key="frame" x="0.0" y="48.5" width="60.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTX-zk-ZfC" userLabel="Padding">
+                                                    <rect key="frame" x="0.0" y="70.5" width="233" height="68.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klc-qt-9lC" userLabel="Separator">
@@ -67,8 +71,9 @@
                                         <constraint firstItem="8qh-7E-57b" firstAttribute="top" secondItem="xn1-bw-YLg" secondAttribute="top" constant="14" id="5V3-Hk-iUg"/>
                                         <constraint firstItem="8qh-7E-57b" firstAttribute="leading" secondItem="xn1-bw-YLg" secondAttribute="leading" constant="15" id="A2r-8S-xb4"/>
                                         <constraint firstItem="OSI-vX-t9H" firstAttribute="trailing" secondItem="xn1-bw-YLg" secondAttribute="trailing" constant="-15" id="FY1-B7-wQB"/>
-                                        <constraint firstAttribute="bottom" secondItem="OSI-vX-t9H" secondAttribute="bottom" constant="14" id="JHQ-za-Zkd"/>
+                                        <constraint firstAttribute="bottom" secondItem="OSI-vX-t9H" secondAttribute="bottom" priority="999" constant="14" id="JHQ-za-Zkd"/>
                                         <constraint firstItem="klc-qt-9lC" firstAttribute="bottom" secondItem="xn1-bw-YLg" secondAttribute="bottom" id="Jzr-8t-ai9"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8qh-7E-57b" secondAttribute="bottom" constant="14" id="PDk-4W-rGX"/>
                                         <constraint firstItem="OSI-vX-t9H" firstAttribute="top" secondItem="8qh-7E-57b" secondAttribute="top" id="frB-JF-YlL"/>
                                         <constraint firstItem="klc-qt-9lC" firstAttribute="trailing" secondItem="xn1-bw-YLg" secondAttribute="trailing" id="gwF-vZ-6mv"/>
                                         <constraint firstItem="klc-qt-9lC" firstAttribute="leading" secondItem="8qh-7E-57b" secondAttribute="leading" id="kfm-2k-FBD"/>
