@@ -31,7 +31,8 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     func searchViewDidLoad() {
         // TableView Setups
-        tableView.rowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 167
         title = NSLocalizedString("Search", comment: "Big nav title")
         
         // Add UISearchController

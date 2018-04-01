@@ -45,6 +45,7 @@ extension UIImageView {
                 DispatchQueue.main.async { if let weakSelf = self {weakSelf.image = image}}
             } else {
                 print("Something wrong with downloading the image")
+                DispatchQueue.main.async { if let weakSelf = self {weakSelf.image = UIImage(imageLiteralResourceName: "noImage")}}
             }
         }
         downloadTask.resume()
