@@ -41,7 +41,6 @@ class SearchInteractor: SearchInteractorDelegate {
     func loadMore() {
         isLoadMore = true
         searchRequest?.page += 1
-        print(searchRequest!.page)
         let url = MoviedbAPI.searchURL(with: searchRequest!.text, page: searchRequest!.page)
         api.startDataTask(url: url)
     }
@@ -64,7 +63,7 @@ class SearchInteractor: SearchInteractorDelegate {
     }
     
     // MARK: Private Methods
-    func process(_ data: Data) {
+    private func process(_ data: Data) {
         if isLoadMore {
             guard let newResults = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie().results else {return}
             searchResponse?.page += 1

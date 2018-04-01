@@ -29,16 +29,18 @@ class SearchResultCell: UITableViewCell {
 
     // MARK: - Boundary Methods
     func configure(_ result: Movie.Result) {
+        let errorImage = #imageLiteral(resourceName: "errorImage")
+        let noDataText = "N/A"
+        
         if let posterURL = result.poster_path {
             let imageURL = MoviedbAPI.imageURL(size: .medium, path: posterURL)
-            downloadTask = poster.loadImage(url: imageURL)
+            downloadTask = poster.loadImage(url: imageURL, errorImage: errorImage)
         } else {
             print("\(result.title) doesn't have poster")
-            poster.image = UIImage(imageLiteralResourceName: "noImage")
+            poster.image = errorImage
         }
-        let unknownText = NSLocalizedString("N/A", comment: "Unknown release date")
         name.text = result.title
-        releaseDate.text = result.release_date ?? unknownText
-        overview.text = result.overview ?? unknownText
+        releaseDate.text = result.release_date ?? noDataText
+        overview.text = result.overview ?? noDataText
     }
 }

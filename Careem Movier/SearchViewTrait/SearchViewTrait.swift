@@ -60,7 +60,6 @@ extension SearchViewTrait where Self: UITableViewController {
         let resultCell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         resultCell.configure(interactor.searchResponse!.results![indexPath.row])
         if shouldLoadMore(indexPath) {
-            print("Sould Load More")
             interactor.loadMore()
             startActivityIndicator()
         }
@@ -105,7 +104,6 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     private func shouldLoadMore(_ indexPath: IndexPath) -> Bool {
         guard let searchResponse = interactor.searchResponse, let results = searchResponse.results, activityView == nil else {return false}
-        print("indexPath.row(\(indexPath.row)) == last(\(results.count - 1)), totalPages(\(searchResponse.total_pages)) > page(\(searchResponse.page))")
         return indexPath.row == results.count - 1 && searchResponse.total_pages > searchResponse.page
     }
 }
