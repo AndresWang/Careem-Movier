@@ -53,8 +53,8 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - UITableView DataSource
     func searchViewNumberOfRows() -> Int {
-        guard let response = interactor.searchResponse, let results = response.results, results.count > 0 else {return 0}
-        return results.count
+        let numberOfRows = interactor.searchResponse?.results?.count ?? 0
+        return numberOfRows
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
         let resultCell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier, for: indexPath) as! SearchResultCell
@@ -64,7 +64,7 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - UISearchBarDelegate
     func searchViewSearchButtonClicked(_ searchBar: UISearchBar) {
-        // Basically We will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts. But the safer the better.
+        // Basically we will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts. But the safer the better.
         guard let text = searchBar.text, !text.isEmpty else {print("No String Entered");searchBar.resignFirstResponder();return}
         searchBar.resignFirstResponder()
         
