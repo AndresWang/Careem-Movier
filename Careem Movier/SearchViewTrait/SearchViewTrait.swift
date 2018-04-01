@@ -34,7 +34,7 @@ extension SearchViewTrait where Self: UITableViewController {
         tableView.rowHeight = 80
         title = NSLocalizedString("Search", comment: "Big nav title")
         
-        // Add SearchBar
+        // Add UISearchController
         let search = UISearchController(searchResultsController: nil)
         search.delegate = self
         search.obscuresBackgroundDuringPresentation = false
