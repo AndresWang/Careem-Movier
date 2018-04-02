@@ -53,14 +53,15 @@ class SearchInteractor: SearchInteractorDelegate {
     // MARK: - APIOutputDelegate
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
         if let error = error as NSError?, error.code == -999 {
-            return // Task was cancelled, should fail silently
+            print("URLSession's task was cancelled -> Handled silently")
+            return
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             if let data = data {
                 process(data)
                 return /* Exit */
             }
         } else {
-            print("URLSession Failure! \(String(describing: response))")
+            print("URLSession Failure! \(String(describing: response)) -> Passed to our error handler")
         }
         
         // Handle errors
