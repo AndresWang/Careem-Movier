@@ -1,5 +1,5 @@
 //
-//  CoreDataStack.swift
+//  CoreDataStore.swift
 //  Careem Movier
 //
 //  Created by Andres Wang on 2018/3/31.
@@ -12,9 +12,10 @@ import CoreData
 // Note: CoreData stack with singleton pattern
 class CoreDataStore {
     static let sharedInstance = CoreDataStore()
+    let modelName = "Careem_Movier"
     
-    private lazy var storeContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Careem_Movier")
+    lazy var storeContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: modelName)
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {print("Unresolved error \(error), \(error.userInfo)")}
         }

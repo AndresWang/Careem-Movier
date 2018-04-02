@@ -21,16 +21,39 @@ class Careem_MovierTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    // MARK: - MoviedAPI
+    func testMoviedbSearchURLIsWorking() {
+        // given
+        let url = MoviedbAPI.searchURL(with: "Batman", page: 1)
+        var result: MoviedbAPI.JSON.Response?
+        
+        // when
+        do {
+            let data = try Data(contentsOf: url)
+            result = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)
+        } catch {
+            print(error.localizedDescription)
         }
+        
+        // then
+        XCTAssertNotNil(result)
+    }
+    func testMoviedbImageURLIsWorking() {
+        // given
+        let posterURL = "/cXqyVkLY2FElBl3rF6vHL3LUbHw.jpg"
+        let url = MoviedbAPI.imageURL(size: .small, path: posterURL)
+        var result: UIImage?
+        
+        // when
+        do {
+            let data = try Data(contentsOf: url)
+            result = UIImage(data: data)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        // then
+        XCTAssertNotNil(result)
     }
     
 }

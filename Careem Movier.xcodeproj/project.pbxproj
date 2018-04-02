@@ -19,7 +19,7 @@
 		09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2B206F8359003F7D43 /* SearchViewTrait.swift */; };
 		09549C2E206F83A3003F7D43 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2D206F83A3003F7D43 /* SearchInteractor.swift */; };
 		09549C30206F8639003F7D43 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2F206F8639003F7D43 /* SearchResultCell.swift */; };
-		09549C32206F8724003F7D43 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C31206F8724003F7D43 /* CoreDataStack.swift */; };
+		09549C32206F8724003F7D43 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C31206F8724003F7D43 /* CoreDataStore.swift */; };
 		09549C34206F8831003F7D43 /* DataStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C33206F8831003F7D43 /* DataStoreDelegate.swift */; };
 		09549C36206F8D0C003F7D43 /* MoviedbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C35206F8D0C003F7D43 /* MoviedbAPI.swift */; };
 		09549C38206F9067003F7D43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C37206F9067003F7D43 /* Extensions.swift */; };
@@ -28,6 +28,8 @@
 		09549C42206FB622003F7D43 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C41206FB622003F7D43 /* Search.swift */; };
 		09ADC01A2070DDE40034F2E8 /* ActivityIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ADC0192070DDE40034F2E8 /* ActivityIndicatable.swift */; };
 		09D34AA6207202D200383AAF /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D34AA5207202D200383AAF /* SuggestionCell.swift */; };
+		09D34AA82072583F00383AAF /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D34AA72072583F00383AAF /* DataStoreTests.swift */; };
+		09D34AAC20725B9000383AAF /* TestCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D34AAB20725B9000383AAF /* TestCoreDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +68,7 @@
 		09549C2B206F8359003F7D43 /* SearchViewTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTrait.swift; sourceTree = "<group>"; };
 		09549C2D206F83A3003F7D43 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		09549C2F206F8639003F7D43 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
-		09549C31206F8724003F7D43 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		09549C31206F8724003F7D43 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		09549C33206F8831003F7D43 /* DataStoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreDelegate.swift; sourceTree = "<group>"; };
 		09549C35206F8D0C003F7D43 /* MoviedbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviedbAPI.swift; sourceTree = "<group>"; };
 		09549C37206F9067003F7D43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -75,6 +77,8 @@
 		09549C41206FB622003F7D43 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		09ADC0192070DDE40034F2E8 /* ActivityIndicatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatable.swift; sourceTree = "<group>"; };
 		09D34AA5207202D200383AAF /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
+		09D34AA72072583F00383AAF /* DataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
+		09D34AAB20725B9000383AAF /* TestCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				09549C12206F80CE003F7D43 /* Careem_MovierTests.swift */,
+				09D34AA72072583F00383AAF /* DataStoreTests.swift */,
 				09549C14206F80CE003F7D43 /* Info.plist */,
 			);
 			path = "Careem MovierTests";
@@ -171,8 +176,9 @@
 		09549C3E206FA57C003F7D43 /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
-				09549C31206F8724003F7D43 /* CoreDataStack.swift */,
+				09549C31206F8724003F7D43 /* CoreDataStore.swift */,
 				09549C33206F8831003F7D43 /* DataStoreDelegate.swift */,
+				09D34AAB20725B9000383AAF /* TestCoreDataStore.swift */,
 			);
 			path = DataStore;
 			sourceTree = "<group>";
@@ -331,9 +337,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				09549C42206FB622003F7D43 /* Search.swift in Sources */,
-				09549C32206F8724003F7D43 /* CoreDataStack.swift in Sources */,
+				09549C32206F8724003F7D43 /* CoreDataStore.swift in Sources */,
 				09549C36206F8D0C003F7D43 /* MoviedbAPI.swift in Sources */,
 				09549C03206F80CC003F7D43 /* Careem_Movier.xcdatamodeld in Sources */,
+				09D34AAC20725B9000383AAF /* TestCoreDataStore.swift in Sources */,
 				09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */,
 				09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */,
 				09549C3C206FA44D003F7D43 /* APIDelegate.swift in Sources */,
@@ -354,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09549C13206F80CE003F7D43 /* Careem_MovierTests.swift in Sources */,
+				09D34AA82072583F00383AAF /* DataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@ protocol APIOutputDelegate: class {
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?)
 }
 
-// Note: MoviedAPI as our DataStoreDelegate
+// Note: MoviedAPI as our APIDelegate
 extension MoviedbAPI: APIDelegate {
     func startDataTask(url: URL) {
         dataTask?.cancel()
