@@ -18,9 +18,14 @@ protocol DataStoreDelegate {
 extension CoreDataStore: DataStoreDelegate {
     // MARK: - Boundary Methods
     func saveSuccessfulQuery(text: String) {
-        let newQuery = NSEntityDescription.insertNewObject(forEntityName: ManagedQuery.entityName(), into: context) as! ManagedQuery
-        newQuery.text = text
-        newQuery.date = Date()
+        // Avoid duplicate queries
+        if let hasQuery = findQuery(withText: text) {
+            hasQuery.date = Date()
+        } else {
+            let newQuery = NSEntityDescription.insertNewObject(forEntityName: ManagedQuery.entityName(), into: context) as! ManagedQuery
+            newQuery.text = text
+            newQuery.date = Date()
+        }
         
         // Delete oldest one if there are more than 10 records
         let queries = fetchSortedQueriesWithNewestFirst()
@@ -29,6 +34,19 @@ extension CoreDataStore: DataStoreDelegate {
     }
     
     // MARK: - Private Methods
+    /// The search is case insensitive
+    private func findQuery(withText text: String) -> ManagedQuery? {
+        let fetchRequest = NSFetchRequest<ManagedQuery>(entityName: ManagedQuery.entityName())
+        let predicate = NSPredicate(format: "%K ==[c] %@", ManagedQuery.Keys.text.rawValue, text)
+        fetchRequest.predicate = predicate
+        do {
+            let matchedQueries = try context.fetch(fetchRequest)
+            return matchedQueries.first
+        } catch {
+            print(error)
+            return nil
+        }
+    }
     private func fetchSortedQueriesWithNewestFirst() -> [ManagedQuery] {
         let fetchRequest = NSFetchRequest<ManagedQuery>(entityName: ManagedQuery.entityName())
         let sortDescriptor = NSSortDescriptor(key: ManagedQuery.Keys.date.rawValue, ascending: false)
