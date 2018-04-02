@@ -39,6 +39,12 @@ class SearchViewController: UITableViewController, SearchViewTrait {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchViewSearchButtonClicked(searchBar)
     }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print(#function)
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print(#function)
+    }
     
     // MARK: - UISearchControllerDelegate
     func didPresentSearchController(_ searchController: UISearchController) {

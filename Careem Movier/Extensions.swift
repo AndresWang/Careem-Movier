@@ -100,3 +100,18 @@ extension UIView {
     }
 }
 
+extension UITableView {
+    func setBackgroundLabel(count: Int, text: String) {
+        if count == 0 {
+            let noDataLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
+            noDataLabel.font = noDataLabel.font.withSize(26)
+            noDataLabel.text = text
+            noDataLabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            noDataLabel.textAlignment = .center
+            self.backgroundView = noDataLabel
+        } else {
+            self.backgroundView = nil
+        }
+    }
+}
+

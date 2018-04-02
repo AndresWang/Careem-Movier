@@ -54,6 +54,8 @@ extension SearchViewTrait where Self: UITableViewController {
     // MARK: - UITableView DataSource & Delegate
     func searchViewNumberOfRows() -> Int {
         let numberOfRows = interactor.searchResponse?.results?.count ?? 0
+        let noMovies = NSLocalizedString("No Movies", comment: "A tableView background label indicating no movies")
+        tableView.setBackgroundLabel(count: numberOfRows, text: noMovies)
         return numberOfRows
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
