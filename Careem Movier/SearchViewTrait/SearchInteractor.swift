@@ -19,12 +19,12 @@ protocol SearchInteractorDelegate: APIOutputDelegate {
     func updateSuggestionQueries()
 }
 class SearchInteractor: SearchInteractorDelegate {
-    private(set) var searchResponse: Movie.Response?
-    private(set) var suggestionQueries: [String] = []
-    private var api: APIDelegate!
-    private var dataStore: DataStoreDelegate!
-    private var searchRequest: SearchRequest?
-    private var isLoadMore = false
+    var searchResponse: Movie.Response?
+    var suggestionQueries: [String] = []
+    var api: APIDelegate!
+    var dataStore: DataStoreDelegate!
+    var searchRequest: SearchRequest?
+    var isLoadMore = false
     
     // MARK: - SearchInteractorDelegate
     func configure() {
