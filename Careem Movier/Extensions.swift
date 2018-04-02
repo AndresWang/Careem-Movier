@@ -53,7 +53,7 @@ extension UIImageView {
     }
     func rounded() {
         self.layer.cornerRadius = 5.0
-        self.clipsToBounds = true
+        self.layer.masksToBounds = true
     }
 }
 

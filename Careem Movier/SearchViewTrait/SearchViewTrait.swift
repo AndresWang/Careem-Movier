@@ -17,7 +17,8 @@ protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate, Activ
     func searchViewDidLoad()
     func searchViewDidAppear()
     func searchViewNumberOfRows() -> Int
-    func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell
+    func searchViewCellForRowAt(_ indexPath: IndexPath) -> UITableViewCell
+    func searchViewDidSelectRowAt(_ indexPath: IndexPath)
     func searchViewSearchButtonClicked(_ searchBar: UISearchBar)
     func searchViewDidPresentSearchController(_ searchController: UISearchController)
 }
@@ -64,7 +65,7 @@ extension SearchViewTrait where Self: UITableViewController {
         tableView.setBackgroundLabel(count: numberOfRows, text: noMovies)
         return numberOfRows
     }
-    func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
+    func searchViewCellForRowAt(_ indexPath: IndexPath) -> UITableViewCell {
         if searchBarIsActive {
             let suggestionCell = tableView.dequeueReusableCell(withIdentifier: "SuggestionCell", for: indexPath) as! SuggestionCell
             suggestionCell.configure(interactor.suggestionQueries[indexPath.row])
@@ -79,16 +80,23 @@ extension SearchViewTrait where Self: UITableViewController {
             return resultCell
         }
     }
+    func searchViewDidSelectRowAt(_ indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SuggestionCell else {return} // Only respond to SuggestionCell
+        guard let searchBar = navigationItem.searchController?.searchBar else {return}
+        tableView.deselectRow(at: indexPath, animated: false)
+        startSearch(searchBar, cell.suggestionText)
+    }
     
     // MARK: - UISearchBarDelegate
     func searchViewSearchButtonClicked(_ searchBar: UISearchBar) {
-        // Basically we will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts. But the safer the better.
-        guard let text = searchBar.text, !text.isEmpty else {print("No String Entered");searchBar.resignFirstResponder();return}
-        searchBar.resignFirstResponder()
-        searchBarIsActive = false
-        let request = SearchRequest(text: text, page: 1, successHandler: successHandler, errorHandler: errorHandler)
-        interactor.search(request: request)
-        startActivityIndicator()
+        /* Basically we will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts.
+        But the safer the better.*/
+        guard let text = searchBar.text, !text.isEmpty else {
+            print("No String Entered")
+            searchBar.resignFirstResponder()
+            return
+        }
+        startSearch(searchBar, text)
     }
     func searchViewSearchTextDidBeginEditing() {
         searchBarIsActive = true
@@ -106,6 +114,13 @@ extension SearchViewTrait where Self: UITableViewController {
     }
     
     // MARK: - Private Methods
+    private func startSearch(_ searchBar: UISearchBar, _ text: String) {
+        searchBar.resignFirstResponder()
+        searchBarIsActive = false
+        let request = SearchRequest(text: text, page: 1, successHandler: successHandler, errorHandler: errorHandler)
+        interactor.search(request: request)
+        startActivityIndicator()
+    }
     private func successHandler(searchText: String?, isLoadMore: Bool) {
         endSearch()
         
