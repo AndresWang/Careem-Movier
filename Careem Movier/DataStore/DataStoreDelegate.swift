@@ -12,6 +12,7 @@ import CoreData
 // Note: Protocol interface for database communication just in case we​ ​are​ ​asked​ ​to​ ​use​ ​a​ ​different​ ​persistent​ ​store​.
 protocol DataStoreDelegate {
     func saveSuccessfulQuery(text: String)
+    func fetchSuggestionQueries() -> [Query]
 }
 
 // Note: CoreData as our DataStoreDelegate
@@ -31,6 +32,9 @@ extension CoreDataStore: DataStoreDelegate {
         let queries = fetchSortedQueriesWithNewestFirst()
         if queries.count > 10 {context.delete(queries.last!)}
         saveContext()
+    }
+    func fetchSuggestionQueries() -> [Query] {
+        return fetchSortedQueriesWithNewestFirst().map{$0.toQuery()}
     }
     
     // MARK: - Private Methods

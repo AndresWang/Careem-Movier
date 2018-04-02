@@ -12,6 +12,7 @@ import UIKit
 class SearchViewController: UITableViewController, SearchViewTrait {
     var interactor: SearchInteractorDelegate!
     var activityView: UIVisualEffectView?
+    var searchBarIsActive = false
 
     // MARK: - View LifeCyle
     override func awakeFromNib() {
@@ -40,10 +41,10 @@ class SearchViewController: UITableViewController, SearchViewTrait {
         searchViewSearchButtonClicked(searchBar)
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print(#function)
+        searchViewSearchTextDidBeginEditing()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print(#function)
+        searchViewSearchCancelButtonClicked()
     }
     
     // MARK: - UISearchControllerDelegate

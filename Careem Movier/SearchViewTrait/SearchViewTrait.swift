@@ -12,6 +12,7 @@ import UIKit
 // Note: SearchViewTrait and its extension not noly make our SearchViewController extremely light, but also make its code shareable for all UITableViewControllers. This is protocol oriented programming's composition. I prefer composition over inheritance, because it is much more flexible. I used this technique in my own project because I have four UITableViewControllers which need the same essential funtionality, but each view still can has its own specialties.
 protocol SearchViewTrait: UISearchControllerDelegate, UISearchBarDelegate, ActivityIndicatable {
     var interactor: SearchInteractorDelegate! {get set}
+    var searchBarIsActive: Bool {get set}
     func searchViewAwakeFromNib()
     func searchViewDidLoad()
     func searchViewDidAppear()
@@ -53,19 +54,30 @@ extension SearchViewTrait where Self: UITableViewController {
     
     // MARK: - UITableView DataSource & Delegate
     func searchViewNumberOfRows() -> Int {
-        let numberOfRows = interactor.searchResponse?.results?.count ?? 0
+        var numberOfRows = 0
+        if searchBarIsActive {
+            numberOfRows = interactor.suggestionQueries.count
+        } else {
+            numberOfRows = interactor.searchResponse?.results?.count ?? 0
+        }
         let noMovies = NSLocalizedString("No Movies", comment: "A tableView background label indicating no movies")
         tableView.setBackgroundLabel(count: numberOfRows, text: noMovies)
         return numberOfRows
     }
     func searchViewCellForRow(at indexPath: IndexPath) -> UITableViewCell {
-        let resultCell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
-        resultCell.configure(interactor.searchResponse!.results![indexPath.row])
-        if shouldLoadMore(indexPath) {
-            interactor.loadMore()
-            startActivityIndicator()
+        if searchBarIsActive {
+            let suggestionCell = tableView.dequeueReusableCell(withIdentifier: "SuggestionCell", for: indexPath) as! SuggestionCell
+            suggestionCell.configure(interactor.suggestionQueries[indexPath.row])
+            return suggestionCell
+        } else {
+            let resultCell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
+            resultCell.configure(interactor.searchResponse!.results![indexPath.row])
+            if shouldLoadMore(indexPath) {
+                interactor.loadMore()
+                startActivityIndicator()
+            }
+            return resultCell
         }
-        return resultCell
     }
     
     // MARK: - UISearchBarDelegate
@@ -73,10 +85,19 @@ extension SearchViewTrait where Self: UITableViewController {
         // Basically we will get searchBar text for sure because iOS's Search Button is auto enabled only when there are texts. But the safer the better.
         guard let text = searchBar.text, !text.isEmpty else {print("No String Entered");searchBar.resignFirstResponder();return}
         searchBar.resignFirstResponder()
-        
+        searchBarIsActive = false
         let request = SearchRequest(text: text, page: 1, successHandler: successHandler, errorHandler: errorHandler)
         interactor.search(request: request)
         startActivityIndicator()
+    }
+    func searchViewSearchTextDidBeginEditing() {
+        searchBarIsActive = true
+        interactor.updateSuggestionQueries()
+        tableView.reloadData()
+    }
+    func searchViewSearchCancelButtonClicked() {
+        searchBarIsActive = false
+        tableView.reloadData()
     }
     
     // MARK: - UISearchControllerDelegate

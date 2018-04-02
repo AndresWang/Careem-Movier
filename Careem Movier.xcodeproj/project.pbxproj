@@ -27,6 +27,7 @@
 		09549C3C206FA44D003F7D43 /* APIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C3B206FA44D003F7D43 /* APIDelegate.swift */; };
 		09549C42206FB622003F7D43 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C41206FB622003F7D43 /* Search.swift */; };
 		09ADC01A2070DDE40034F2E8 /* ActivityIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ADC0192070DDE40034F2E8 /* ActivityIndicatable.swift */; };
+		09D34AA6207202D200383AAF /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D34AA5207202D200383AAF /* SuggestionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		09549C3B206FA44D003F7D43 /* APIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDelegate.swift; sourceTree = "<group>"; };
 		09549C41206FB622003F7D43 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		09ADC0192070DDE40034F2E8 /* ActivityIndicatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatable.swift; sourceTree = "<group>"; };
+		09D34AA5207202D200383AAF /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				09549C2B206F8359003F7D43 /* SearchViewTrait.swift */,
 				09549C2D206F83A3003F7D43 /* SearchInteractor.swift */,
 				09549C2F206F8639003F7D43 /* SearchResultCell.swift */,
+				09D34AA5207202D200383AAF /* SuggestionCell.swift */,
 			);
 			path = SearchViewTrait;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */,
 				09549BFD206F80CC003F7D43 /* SearchViewController.swift in Sources */,
 				09549C3C206FA44D003F7D43 /* APIDelegate.swift in Sources */,
+				09D34AA6207202D200383AAF /* SuggestionCell.swift in Sources */,
 				09549C38206F9067003F7D43 /* Extensions.swift in Sources */,
 				09ADC01A2070DDE40034F2E8 /* ActivityIndicatable.swift in Sources */,
 				092AA1BC2070C020000E676D /* Query.swift in Sources */,

@@ -87,6 +87,41 @@
                                     <outlet property="releaseDate" destination="JOx-ks-m31" id="M2g-cb-EBI"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SuggestionCell" id="T8K-fq-I3r" userLabel="SuggestionCell" customClass="SuggestionCell" customModule="Careem_Movier" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="195" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T8K-fq-I3r" id="M19-LQ-cVx">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggestion Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiQ-ZD-Vl5" userLabel="SuggestionName">
+                                            <rect key="frame" x="16" y="12" width="343" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.42352941176470588" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vdr-Tf-vJg" userLabel="Separator">
+                                            <rect key="frame" x="16" y="43.5" width="359" height="0.5"/>
+                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="sv4-OH-Dgl"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XiQ-ZD-Vl5" firstAttribute="top" secondItem="M19-LQ-cVx" secondAttribute="top" constant="12" id="AId-Sb-0Sj"/>
+                                        <constraint firstAttribute="trailing" secondItem="Vdr-Tf-vJg" secondAttribute="trailing" id="CEd-lf-CpA"/>
+                                        <constraint firstItem="XiQ-ZD-Vl5" firstAttribute="leading" secondItem="M19-LQ-cVx" secondAttribute="leading" constant="16" id="hYB-0e-2ix"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vdr-Tf-vJg" secondAttribute="bottom" id="oKn-zK-GNl"/>
+                                        <constraint firstAttribute="bottom" secondItem="XiQ-ZD-Vl5" secondAttribute="bottom" constant="11" id="qEZ-wu-XJe"/>
+                                        <constraint firstItem="Vdr-Tf-vJg" firstAttribute="leading" secondItem="XiQ-ZD-Vl5" secondAttribute="leading" id="rXg-GI-Iim"/>
+                                        <constraint firstAttribute="trailing" secondItem="XiQ-ZD-Vl5" secondAttribute="trailing" constant="16" id="uGD-4t-N2c"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="suggestionName" destination="XiQ-ZD-Vl5" id="utK-L3-W0A"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="TzZ-ni-odB" id="4aE-Jt-bI3"/>

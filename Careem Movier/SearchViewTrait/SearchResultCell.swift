@@ -36,7 +36,7 @@ class SearchResultCell: UITableViewCell {
             let imageURL = MoviedbAPI.imageURL(size: .medium, path: posterURL)
             downloadTask = poster.loadImage(url: imageURL, errorImage: errorImage)
         } else {
-            print("\(result.title) doesn't have poster")
+            print("\(result.title) doesn't have poster -> Handled with an error image")
             poster.image = errorImage
         }
         name.text = result.title
