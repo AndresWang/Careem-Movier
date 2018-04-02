@@ -11,17 +11,20 @@ import XCTest
 
 class MoviedbAPITests: XCTestCase {
     var sut: MoviedbAPI!
-    var output: APIOutputDelegate!
+    var output: APIOutputSpy!
     
-    // MARK: - Dummy Output
-    class APIOutputDummy: APIOutputDelegate {
-        func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {}
+    // MARK: - Output Spy
+    class APIOutputSpy: NSObject, APIOutputDelegate {
+        @objc dynamic var didRecieveResponseWasCalled = false
+        func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
+            didRecieveResponseWasCalled = true
+        }
     }
     
     // MARK: - Lifecyle
     override func setUp() {
         super.setUp()
-        output = APIOutputDummy()
+        output = APIOutputSpy()
         sut = MoviedbAPI(output: output)
     }
     override func tearDown() {
@@ -64,7 +67,27 @@ class MoviedbAPITests: XCTestCase {
         // then
         XCTAssertNotNil(result)
     }
-    func testStartDataTask() {
+    func testStartDataTaskShouldStartURLSessionTask() {
+        // given
+        let url = MoviedbAPI.searchURL(with: "Batman", page: 1)
         
+        // when
+        sut.startDataTask(url: url)
+        
+        // then
+        XCTAssert(sut.dataTask!.state == .running)
+    }
+    func testStartDataTaskShouldCallOutputWhenHaveResponse() {
+        // given
+        let url = MoviedbAPI.searchURL(with: "Batman", page: 1)
+        
+        // when
+        sut.startDataTask(url: url)
+        let keyPath = #keyPath(APIOutputSpy.didRecieveResponseWasCalled)
+        let expectation = XCTKVOExpectation(keyPath: keyPath, object: output, expectedValue: true)
+        let result = XCTWaiter().wait(for: [expectation], timeout: 5)
+        
+        // then
+        XCTAssert(result == .completed)
     }
 }
