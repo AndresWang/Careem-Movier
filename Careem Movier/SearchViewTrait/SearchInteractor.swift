@@ -54,7 +54,7 @@ class SearchInteractor: SearchInteractorDelegate {
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
         if let error = error as NSError?, error.code == -999 {
             print("URLSession's task was cancelled -> Handled silently")
-            return
+            return /* Exit */
         } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             if let data = data {
                 process(data)
