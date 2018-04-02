@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Note: SearchInteractor is the domain object for SearchViewTrait, a manager for all data manipulations, normally it will ask database or api worker for data and report the result to its viewController. We use SearchInteractorDelegate as interface just in case we may change our domain object. This interface is searchViewTrait's viewcontroller's only output.
+// Note: SearchInteractor is the domain object for SearchViewTrait, a manager for all data manipulations, normally it will delegate tasks to database or api worker for fetching data and report the result to its viewController. We use SearchInteractorDelegate as interface just in case we may change our domain object. This interface is searchViewTrait's viewcontroller's only output.
 protocol SearchInteractorDelegate: APIOutputDelegate {
     var searchResponse: Movie.Response? {get}
     var suggestionQueries: [String] {get}
