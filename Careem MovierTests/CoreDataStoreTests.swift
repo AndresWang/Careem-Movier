@@ -10,7 +10,7 @@ import XCTest
 import CoreData
 @testable import Careem_Movier
 
-class DataStoreTests: XCTestCase {
+class CoreDataStoreTests: XCTestCase {
     var sut: CoreDataStore!
     
     // MARK: - Lifecyle
