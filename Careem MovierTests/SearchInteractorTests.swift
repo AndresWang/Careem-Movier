@@ -42,6 +42,7 @@ class SearchInteractorTests: XCTestCase {
             return []
         }
     }
+    
     // MARK: Helper Methods
     func getData() -> Data? {
         let url = MoviedbAPI.searchURL(with: "Batman", page: 1)
