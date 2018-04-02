@@ -22,7 +22,6 @@ protocol APIOutputDelegate: class {
 
 // Note: MoviedAPI as our DataStoreDelegate
 extension MoviedbAPI: APIDelegate {
-    // MARK: - Boundary Methods
     func startDataTask(url: URL) {
         dataTask?.cancel()
         

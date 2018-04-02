@@ -35,7 +35,7 @@ extension SearchViewTrait where Self: UITableViewController {
         // TableView Setups
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 167
-        title = NSLocalizedString("Search", comment: "Big nav title")
+        title = NSLocalizedString("Search", comment: "NavigationBar title")
         
         // Add UISearchController
         let search = UISearchController(searchResultsController: nil)
@@ -121,6 +121,11 @@ extension SearchViewTrait where Self: UITableViewController {
         interactor.search(request: request)
         startActivityIndicator()
     }
+    private func endSearch() {
+        stopActivityIndicator()
+        tableView.reloadData()
+        navigationItem.searchController?.isActive = false
+    }
     private func successHandler(searchText: String?, isLoadMore: Bool) {
         endSearch()
         
@@ -134,11 +139,6 @@ extension SearchViewTrait where Self: UITableViewController {
     private func errorHandler() {
         endSearch()
         showNetworkError()
-    }
-    private func endSearch() {
-        stopActivityIndicator()
-        tableView.reloadData()
-        navigationItem.searchController?.isActive = false
     }
     private func shouldLoadMore(_ indexPath: IndexPath) -> Bool {
         guard let searchResponse = interactor.searchResponse, let results = searchResponse.results, activityView == nil else {return false}

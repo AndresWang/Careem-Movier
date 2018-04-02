@@ -26,8 +26,7 @@ class SearchInteractor: SearchInteractorDelegate {
     private var searchRequest: SearchRequest?
     private var isLoadMore = false
     
-    // MARK: - Boundary Methods
-    // MARK: SearchInteractorDelegate
+    // MARK: - SearchInteractorDelegate
     func configure() {
         self.api = MoviedbAPI(output: self)
         self.dataStore = CoreDataStore.sharedInstance
@@ -51,7 +50,7 @@ class SearchInteractor: SearchInteractorDelegate {
         suggestionQueries = dataStore.fetchSuggestionQueries().map{$0.text}
     }
     
-    // MARK: APIOutputDelegate
+    // MARK: - APIOutputDelegate
     func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {
         if let error = error as NSError?, error.code == -999 {
             return // Task was cancelled, should fail silently
@@ -68,7 +67,7 @@ class SearchInteractor: SearchInteractorDelegate {
         DispatchQueue.main.async {self.searchRequest?.errorHandler()}
     }
     
-    // MARK: Private Methods
+    // MARK: - Private Methods
     private func process(_ data: Data) {
         if isLoadMore {
             guard let newResults = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie().results else {return}
