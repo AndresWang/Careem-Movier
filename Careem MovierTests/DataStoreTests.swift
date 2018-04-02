@@ -13,16 +13,17 @@ import CoreData
 class DataStoreTests: XCTestCase {
     var sut: CoreDataStore!
     
+    // MARK: - Lifecyle
     override func setUp() {
         super.setUp()
         sut = TestCoreDataStore()
     }
-    
     override func tearDown() {
         sut = nil
         super.tearDown()
     }
     
+    // MARK: - Tests
     func testSaveSuccessfulQueryShouldSaveTheQuery() {
         // given
         let queryText = "Batman"

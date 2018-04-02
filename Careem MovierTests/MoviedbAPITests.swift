@@ -1,5 +1,5 @@
 //
-//  Careem_MovierTests.swift
+//  MoviedbAPITests.swift
 //  Careem MovierTests
 //
 //  Created by Andres Wang on 2018/3/31.
@@ -9,19 +9,28 @@
 import XCTest
 @testable import Careem_Movier
 
-class Careem_MovierTests: XCTestCase {
+class MoviedbAPITests: XCTestCase {
+    var sut: MoviedbAPI!
+    var output: APIOutputDelegate!
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    // MARK: - Dummy Output
+    class APIOutputDummy: APIOutputDelegate {
+        func didRecieveResponse(data: Data?, response: URLResponse?, error: Error?) {}
     }
     
+    // MARK: - Lifecyle
+    override func setUp() {
+        super.setUp()
+        output = APIOutputDummy()
+        sut = MoviedbAPI(output: output)
+    }
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        output = nil
         super.tearDown()
     }
     
-    // MARK: - MoviedAPI
+    // MARK: - Tests
     func testMoviedbSearchURLIsWorking() {
         // given
         let url = MoviedbAPI.searchURL(with: "Batman", page: 1)
@@ -55,5 +64,7 @@ class Careem_MovierTests: XCTestCase {
         // then
         XCTAssertNotNil(result)
     }
-    
+    func testStartDataTask() {
+        
+    }
 }

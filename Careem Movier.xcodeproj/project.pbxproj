@@ -14,7 +14,7 @@
 		09549C03206F80CC003F7D43 /* Careem_Movier.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09549C01206F80CC003F7D43 /* Careem_Movier.xcdatamodeld */; };
 		09549C05206F80CE003F7D43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09549C04206F80CE003F7D43 /* Assets.xcassets */; };
 		09549C08206F80CE003F7D43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09549C06206F80CE003F7D43 /* LaunchScreen.storyboard */; };
-		09549C13206F80CE003F7D43 /* Careem_MovierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C12206F80CE003F7D43 /* Careem_MovierTests.swift */; };
+		09549C13206F80CE003F7D43 /* MoviedbAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C12206F80CE003F7D43 /* MoviedbAPITests.swift */; };
 		09549C1E206F80CE003F7D43 /* Careem_MovierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C1D206F80CE003F7D43 /* Careem_MovierUITests.swift */; };
 		09549C2C206F8359003F7D43 /* SearchViewTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2B206F8359003F7D43 /* SearchViewTrait.swift */; };
 		09549C2E206F83A3003F7D43 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09549C2D206F83A3003F7D43 /* SearchInteractor.swift */; };
@@ -60,7 +60,7 @@
 		09549C07206F80CE003F7D43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09549C09206F80CE003F7D43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09549C0E206F80CE003F7D43 /* Careem MovierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Careem MovierTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09549C12206F80CE003F7D43 /* Careem_MovierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Careem_MovierTests.swift; sourceTree = "<group>"; };
+		09549C12206F80CE003F7D43 /* MoviedbAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviedbAPITests.swift; sourceTree = "<group>"; };
 		09549C14206F80CE003F7D43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09549C19206F80CE003F7D43 /* Careem MovierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Careem MovierUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09549C1D206F80CE003F7D43 /* Careem_MovierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Careem_MovierUITests.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		09549C11206F80CE003F7D43 /* Careem MovierTests */ = {
 			isa = PBXGroup;
 			children = (
-				09549C12206F80CE003F7D43 /* Careem_MovierTests.swift */,
+				09549C12206F80CE003F7D43 /* MoviedbAPITests.swift */,
 				09D34AA72072583F00383AAF /* DataStoreTests.swift */,
 				09549C14206F80CE003F7D43 /* Info.plist */,
 			);
@@ -360,7 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09549C13206F80CE003F7D43 /* Careem_MovierTests.swift in Sources */,
+				09549C13206F80CE003F7D43 /* MoviedbAPITests.swift in Sources */,
 				09D34AA82072583F00383AAF /* DataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
