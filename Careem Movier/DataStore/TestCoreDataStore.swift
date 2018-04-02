@@ -15,7 +15,7 @@ class TestCoreDataStore: CoreDataStore {
         super.init()
         
         let persistentStoreDescription = NSPersistentStoreDescription()
-        persistentStoreDescription.type = NSInMemoryStoreType
+        persistentStoreDescription.type = NSInMemoryStoreType // We only change here
         
         let container = NSPersistentContainer(name: modelName)
         container.persistentStoreDescriptions = [persistentStoreDescription]
