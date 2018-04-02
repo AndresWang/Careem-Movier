@@ -78,7 +78,7 @@ class SearchInteractor: SearchInteractorDelegate {
             searchResponse = data.parseTo(jsonType: MoviedbAPI.JSON.Response.self)?.toMovie()
         }
         let resultCount = searchResponse?.results?.count ?? 0
-        let searchText = resultCount > 0 ? searchRequest!.text : nil
+        let searchText = resultCount > 0 ? searchRequest?.text : nil
         DispatchQueue.main.async {self.searchRequest?.successHandler(searchText, self.isLoadMore)}
     }
 }
